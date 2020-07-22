@@ -21,8 +21,11 @@ export const stop = (): StopAction => ({
   type: STOP
 })
 
+export const selectRecorderState = (rootState: RootState) => rootState.recorder;
 
-export const selectDateStart = (rootState: RootState) => rootState.recorder.dateStart
+
+export const selectDateStart = (rootState: RootState) => selectRecorderState(rootState).dateStart
+
 
 const initialState: RecorderState = {
   dateStart: ''
