@@ -2,8 +2,9 @@ import React, {useRef, useState, useEffect} from 'react';
 import cx from 'classnames'
 import {useDispatch, useSelector} from 'react-redux'
 import './Recorder.css'
-import { start, selectDateStart } from '../../redux/recorder';
+import { start, selectDateStart, stop } from '../../redux/recorder';
 import {addZero} from '../../lib/utils'
+import { createUserEvent } from '../../redux/user-events';
 
 
 
@@ -18,10 +19,18 @@ const Recorder = () => {
 
 
   const handleClick = () => {
-    dispatch(start());
-    interval.current = window.setInterval(() => {
-      setCount(count => count + 1)
-    }, 1000)
+    if(started){
+      window.clearInterval(interval.current)
+      dispatch(createUserEvent())
+      dispatch(stop())
+ 
+    } else {
+      dispatch(start());
+      interval.current = window.setInterval(() => {
+        setCount(count => count + 1)
+      }, 1000)
+    }
+
   }
 
   useEffect(() => {
