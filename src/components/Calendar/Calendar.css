@@ -41,6 +41,8 @@
   flex-grow: 1;
   flex-basis: 82%;
   line-height: 23px;
+  text-align: left;
+
 }
 
 .calendar-event-time {
